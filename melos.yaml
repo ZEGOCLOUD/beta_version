@@ -1,0 +1,117 @@
+
+# melos bootstrap
+# melos list -l
+# melos clean
+# melos get
+
+
+# auto publish see https://melos.invertase.dev/guides/automated-releases
+# melos publish --dry-run
+# melos publish --no-dry-run
+
+## analyze
+# melos analyze 
+# melos metrics 
+
+# see https://pub.dev/packages/melos
+
+name: zego_uikit_flutter
+
+packages:
+  - zego_zimkit
+  - zego_zimkit_demo/**
+  - zego_plugin_adapter
+  - zego_uikit_signaling_plugin
+  - zego_uikit
+  - zego_uikit_prebuilt_*
+  - zego_uikit_*_plugin
+  - zego_uikit_demo/github/*
+  - zego_uikit_demo/tester/*
+  - zego_uikit_demo/develop/mixture_prebuilt
+
+scripts:
+
+  clean:
+    run: |
+      melos exec -c 6 --fail-fast -- "flutter clean" \
+      && melos exec -- \
+        rm -rf ./build ./android/.gradle ./ios/.symlinks ./ios/Pods ./android/.idea ./.idea ./.dart-tool/build \
+      && melos exec -c 1 --fail-fast -- "flutter pub get"
+
+  get:
+    run: melos exec -c 1 --fail-fast -- "flutter pub get"
+
+
+  fixall:
+    run: |
+      melos run sort \
+      && melos run fix \
+      && melos run format
+
+
+  sort:
+    run: |
+      melos exec -c 4 --ignore="zego_zimkit**demo" flutter pub run import_sorter:main 
+
+  fix:
+    run: melos exec -c 4 --fail-fast -- "dart fix --apply"
+
+  format:
+    run: |
+      melos exec -c 1 flutter format .
+
+  analyze:
+    run: |
+      melos exec -c 5 dart analyze .
+
+  metrics:
+    run: |
+      melos exec -c 1 flutter pub run dart_code_metrics:metrics analyze lib
+    description: |
+      Run `dart_code_metrics` in all packages.
+
+
+  rm_analysis:
+    run: |
+      melos exec -c 5  -- \
+        rm analysis_options.yaml
+    description: |
+      we only need one analysis_options.yaml file
+
+
+
+  build:android:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter build apk"
+    description: Build a specific example app for Android.
+    select-package:
+      dir-exists:
+        - android
+
+  build:ios:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter build ios --no-codesign"
+    description: Build a specific example app for iOS.
+    select-package:
+      dir-exists:
+        - ios
+
+
+  build:macos:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter build macos"
+    description: |
+      Build a specific example app for macOS.
+    select-package:
+      dir-exists:
+        - macos
+
+  build:all:
+    run: |
+      melos run build:android --no-select && \
+      melos run build:ios --no-select && \
+      melos run build:macos --no-select && \
+    description: Build all example apps.

@@ -1,0 +1,22 @@
+name: zego_plugin_adapter
+description: ZegoCloud's plugin adapter.
+version: 1.0.0
+homepage: https://www.zegocloud.com/
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+  dart_code_metrics: any
+  import_sorter: any
+
+import_sorter:
+  comments: false

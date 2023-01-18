@@ -1,0 +1,51 @@
+name: zego_zimkit
+description: zego imkit.
+version: 0.0.1
+homepage: https://www.zegocloud.com/
+publish_to: 'none' 
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.5
+  equatable: ^2.0.5
+  cached_network_image: ^3.2.3
+  permission_handler: ^10.2.0
+  wakelock: ^0.6.2
+  http: ^0.13.5
+  encrypt: ^5.0.1
+  logging: ^1.1.0
+  badges: ^2.0.3
+  async: any
+  video_player: ^2.4.8
+  file_picker: ^5.2.3
+  video_player_macos: ^1.0.6
+  chewie: ^1.3.6
+  zego_plugin_adapter: 
+    git:
+      url: https://github.com/ZEGOCLOUD/beta_version
+      path: zego_plugin_adapter
+      ref: ghbeta
+  zego_uikit_signaling_plugin: 
+    git:
+      url: https://github.com/ZEGOCLOUD/beta_version
+      path: zego_uikit_signaling_plugin
+      ref: ghbeta
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  dart_code_metrics: any
+  flutter_lints: any
+  import_sorter: any
+
+import_sorter:
+  comments: false
+
+flutter:
+  uses-material-design: true
