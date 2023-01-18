@@ -1,6 +1,8 @@
 
 # ZIMKit(ZegoCloud In-App Chat UIKit)
 
+![imkit+callkit](./doc/imkti+callkit.gif)
+
 🥳beta support:
 - Create peer-to-peer chat / Create group chat/ Join group chat
 - Send text, picture(<10M), gif(<10M), video(<100M), file(<100M)
