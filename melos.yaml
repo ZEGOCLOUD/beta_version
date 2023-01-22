@@ -25,9 +25,6 @@ packages:
   - zego_uikit
   - zego_uikit_prebuilt_*
   - zego_uikit_*_plugin
-  - zego_uikit_demo/github/*
-  - zego_uikit_demo/tester/*
-  - zego_uikit_demo/develop/mixture_prebuilt
 
 scripts:
 
